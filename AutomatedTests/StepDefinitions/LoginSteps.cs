@@ -1,13 +1,20 @@
 ﻿namespace AutomatedTests.StepDefinitions
 {
+    using BoDi;
+    using OpenQA.Selenium;
+    using PageObjects;
     using TechTalk.SpecFlow;
 
     [Binding]
     public class LoginSteps
     {
-        public void Start()
-        {
+        private IObjectContainer _objectContainer;
+        private IWebDriver _driver;
 
+        public LoginSteps(IObjectContainer objectContainer)
+        {
+            _objectContainer = objectContainer;
+            _driver = objectContainer.Resolve<IWebDriver>(Constants.WEBDRIVER);
         }
 
         [Given(@"I am on the Sauce Demo Login Page")]
