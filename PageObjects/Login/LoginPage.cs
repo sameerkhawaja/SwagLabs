@@ -29,8 +29,8 @@ namespace PageObjects
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementIsVisible(Locators.UserNameField));
 
-            _driver.FindElement(Locators.UserNameField).SendKeys("standard_user");
-            _driver.FindElement(Locators.PasswordField).SendKeys("secret_sauce");
+            _driver.FindElement(Locators.UserNameField).SendKeys(Constants.STANDARDUSERNAME);
+            _driver.FindElement(Locators.PasswordField).SendKeys(Constants.STANDARDPASSWORD);
         }
 
         public void Login()
@@ -49,11 +49,11 @@ namespace PageObjects
             return _driver.FindElement(Locators.ErrorContainer).Displayed;
         }
 
-        public bool? DoesErrorMessageContainText(string p0)
+        public bool? DoesErrorMessageContainText(string errorText)
         {
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementIsVisible(Locators.ErrorContainer));
-            return _driver.FindElement(Locators.ErrorContainer).Text.Contains(p0);
+            return _driver.FindElement(Locators.ErrorContainer).Text.Contains(errorText);
         }
 
         public void FillBadCredentials()
@@ -61,8 +61,8 @@ namespace PageObjects
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementIsVisible(Locators.UserNameField));
 
-            _driver.FindElement(Locators.UserNameField).SendKeys("locked_out_user");
-            _driver.FindElement(Locators.PasswordField).SendKeys("secret_sauce");
+            _driver.FindElement(Locators.UserNameField).SendKeys(Constants.LOCKEDUSERNAME);
+            _driver.FindElement(Locators.PasswordField).SendKeys(Constants.LOCKEDPASSWORD);
         }
     }
 }
