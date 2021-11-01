@@ -65,7 +65,7 @@
         public void ThenIVerifyTheErrorMessageContainsTheText(string errorMessage)
         {
             Assert.True(loginPage.DoesErrorMessageExist());
-            Assert.True(loginPage.DoesErrorMessageContainText(errorMessage));
+            Assert.AreEqual(loginPage.GetErrorMessageText(), errorMessage);
         }
     }
 }

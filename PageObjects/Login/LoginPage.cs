@@ -47,10 +47,10 @@ namespace PageObjects
             return _driver.FindElement(Locators.ErrorContainer).Displayed;
         }
 
-        public bool DoesErrorMessageContainText(string errorText)
+        public string GetErrorMessageText()
         {
             _driver.WaitForElement(Locators.ErrorContainer);
-            return _driver.FindElement(Locators.ErrorContainer).Text.Contains(errorText);
+            return _driver.FindElement(Locators.ErrorContainer).Text;
         }
 
         public void FillBadCredentials()

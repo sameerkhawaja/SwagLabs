@@ -159,8 +159,7 @@ this.ScenarioInitialize(scenarioInfo);
         testRunner.And("I click the Login Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 17
-    testRunner.Then("I verify the Error Message contains the text \"Sorry, this user has been locked ou" +
-                        "t.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("I verify the Error Message contains the text \"Sorry, this user has been banned.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
