@@ -13,6 +13,7 @@ namespace PageObjects
     public class LoginPage
     {
         private IWebDriver _driver;
+        private const string pageUrl = "https://www.saucedemo.com/";
 
         public LoginPage(IWebDriver driver)
         {
@@ -21,13 +22,13 @@ namespace PageObjects
 
         public void NavigateToPage()
         {
-            _driver.Navigate().GoToUrl("https://www.saucedemo.com/");
+            _driver.Navigate().GoToUrl(pageUrl);
         }
 
         public void FillCredentials()
         {
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
-            wait.Until(ExpectedConditions.ElementIsVisible(Locators.UserNameField));
+            _driver.WaitForElement(Locators.UserNameField);
 
             _driver.FindElement(Locators.UserNameField).SendKeys(Constants.STANDARDUSERNAME);
             _driver.FindElement(Locators.PasswordField).SendKeys(Constants.STANDARDPASSWORD);
@@ -35,31 +36,26 @@ namespace PageObjects
 
         public void Login()
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
-            wait.Until(ExpectedConditions.ElementIsVisible(Locators.LoginButton));
+            _driver.WaitForElement(Locators.LoginButton);
 
             _driver.FindElement(Locators.LoginButton).Click();
         }
 
-        public bool? DoesErrorMessageExist()
+        public bool DoesErrorMessageExist()
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
-            wait.Until(ExpectedConditions.ElementIsVisible(Locators.ErrorContainer));
-
+            _driver.WaitForElement(Locators.ErrorContainer);
             return _driver.FindElement(Locators.ErrorContainer).Displayed;
         }
 
-        public bool? DoesErrorMessageContainText(string errorText)
+        public bool DoesErrorMessageContainText(string errorText)
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
-            wait.Until(ExpectedConditions.ElementIsVisible(Locators.ErrorContainer));
+            _driver.WaitForElement(Locators.ErrorContainer);
             return _driver.FindElement(Locators.ErrorContainer).Text.Contains(errorText);
         }
 
         public void FillBadCredentials()
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
-            wait.Until(ExpectedConditions.ElementIsVisible(Locators.UserNameField));
+            _driver.WaitForElement(Locators.UserNameField);
 
             _driver.FindElement(Locators.UserNameField).SendKeys(Constants.LOCKEDUSERNAME);
             _driver.FindElement(Locators.PasswordField).SendKeys(Constants.LOCKEDPASSWORD);

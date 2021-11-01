@@ -1,18 +1,13 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Locators = PageObjects.TheSauceDemoPage.TheSauceDemoPageLocators;
 
 namespace PageObjects.TheSauceDemoPage
 {
     public class TheSauceDemoMainPage
     {
-        public string DemoPageUrl = "https://www.saucedemo.com/inventory.html";
+        public string pageUrl = "https://www.saucedemo.com/inventory.html";
 
         private readonly IWebDriver _driver;
 
@@ -21,17 +16,16 @@ namespace PageObjects.TheSauceDemoPage
             _driver = driver;
         }
 
-        public bool LogoExists()
+        public bool DoesLogoExist()
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
-            wait.Until(ExpectedConditions.ElementIsVisible(Locators.AppLogo));
+            _driver.WaitForElement(Locators.AppLogo);
 
             return _driver.FindElement(Locators.AppLogo).Displayed;
         }
 
-        public bool LandedOnPage()
+        public bool DidUserLandOnPage()
         {
-            return _driver.Url == DemoPageUrl;
+            return _driver.Url == pageUrl;
         }
     }
 }
